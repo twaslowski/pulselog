@@ -7,6 +7,7 @@ import { Header } from "@/components/header";
 import React from "react";
 import { instanceUrl } from "@/lib/utils";
 import { Toaster } from "react-hot-toast";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL(instanceUrl()),
@@ -40,6 +41,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.className} antialiased`}>
+        <Script
+          defer
+          src="https://tracking.twaslowski.com/script.js"
+          data-website-id="38627a8d-d8bf-4921-b931-9173a2cc9594"
+          strategy="afterInteractive"
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

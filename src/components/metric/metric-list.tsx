@@ -58,8 +58,8 @@ export default function MetricList({
     } else {
       // Create optimistic tracking entry
       newTracking.set(metric.id, {
-        user_id: "",
-        tracked_at: new Date().toISOString(),
+        userId: "",
+        trackedAt: new Date().toISOString(),
         baseline: 0,
         metric: metric,
       });

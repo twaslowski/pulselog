@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import { extractErrorMessage } from "@/lib/utils";
 import { CheckIcon } from "lucide-react";
 import { AdditionalMetricPicker } from "@/components/entry/creation/additional-metric-picker";
+import { DatePicker } from "@/components/entry/creation/datetime-input";
 
 interface EntryEditDialogProps {
   entry: Entry;
@@ -27,9 +28,7 @@ export default function EntryEditDialog({
   onClose,
   onComplete,
 }: EntryEditDialogProps) {
-  const [recordedAt, setRecordedAt] = useState(
-    new Date(entry.recorded_at).toISOString().slice(0, 16),
-  );
+  const [recordedAt, setRecordedAt] = useState(new Date(entry.recorded_at));
 
   const initialValues: Record<string, number> = {};
   entry.values.forEach((value) => {
@@ -65,7 +64,7 @@ export default function EntryEditDialog({
       .filter(([, value]) => value !== undefined)
       .map(([metricId, value]) =>
         EntryValueSchema.parse({
-          metric_id: metricId,
+          metricId: metricId,
           value: value,
         }),
       );
@@ -76,7 +75,7 @@ export default function EntryEditDialog({
     try {
       const entryValues = deriveEntryValues();
       await updateEntry(entry.id, {
-        recorded_at: recordedAt,
+        recordedAt,
         comment,
         values: entryValues,
       });
@@ -112,15 +111,7 @@ export default function EntryEditDialog({
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Date/Time Input */}
-            <div className="space-y-2">
-              <Label htmlFor="recorded-at">Date & Time</Label>
-              <Input
-                id="recorded-at"
-                type="datetime-local"
-                value={recordedAt}
-                onChange={(e) => setRecordedAt(e.target.value)}
-              />
-            </div>
+            <DatePicker onChange={setRecordedAt} initial={entry.recorded_at} />
 
             <div className="border border-primary/70" />
 

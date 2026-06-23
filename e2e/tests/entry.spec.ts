@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-
 test.describe(`Entry creation`, () => {
   // Use the language-specific authentication
   test.use({
@@ -13,10 +12,8 @@ test.describe(`Entry creation`, () => {
     // Click the button of the "mood" metric; requires mood to be tracked and Neutral to be the default
     // await page.getByRole("button", { name: "Neutral" }).click()
 
-    await page.getByRole("button", { name: "save-entry" }).click()
+    await page.getByRole("button", { name: "save-entry" }).click();
 
-    await expect(
-      page.getByText("Success")
-    ).toBeVisible();
+    await expect(page.getByText("Success")).toBeVisible();
   });
 });

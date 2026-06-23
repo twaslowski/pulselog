@@ -81,7 +81,7 @@ export default function EntriesPieChart({
 
     filteredEntries.forEach((entry) => {
       entry.values.forEach((value) => {
-        if (value.metric_id === selectedMetricId) {
+        if (value.metricId === selectedMetricId) {
           const currentCount = valueCounts.get(value.value) || 0;
           valueCounts.set(value.value, currentCount + 1);
           totalCount++;

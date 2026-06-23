@@ -1,27 +1,69 @@
 "use client";
 
-import React from "react";
-import { Calendar } from "lucide-react";
+import { useState } from "react";
+import { format } from "date-fns";
+import { ChevronDownIcon } from "lucide-react";
 
-interface DateTimeInputProps {
-  value: string;
-  onChange: (value: string) => void;
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
+interface DatePickerInputProps {
+  initial?: Date;
+  onChange: (value: Date) => void;
 }
 
-export default function DateTimeInput({ value, onChange }: DateTimeInputProps) {
+export function DatePicker({ onChange, initial }: DatePickerInputProps) {
+  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState<Date | undefined>(initial ?? new Date());
+
   return (
-    <div>
-      <label className="flex items-center gap-2 text-sm font-semibold mb-3">
-        <Calendar className="w-5 h-5 text-indigo-600" />
-        When did this occur?
-      </label>
-      <input
-        type="datetime-local"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-indigo-500 focus:outline-none"
-        required
-      />
-    </div>
+    <FieldGroup className="mx-auto max-w-xs flex-row">
+      <Field>
+        <FieldLabel htmlFor="date-picker-optional">Date</FieldLabel>
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              id="date-picker-optional"
+              className="w-32 justify-between font-normal"
+            >
+              {date ? format(date, "PPP") : "Select date"}
+              <ChevronDownIcon data-icon="inline-end" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={date}
+              captionLayout="dropdown"
+              defaultMonth={date}
+              onSelect={(date) => {
+                setDate(date);
+                // todo: potentially risky.
+                onChange(date!);
+                setOpen(false);
+              }}
+            />
+          </PopoverContent>
+        </Popover>
+      </Field>
+      <Field className="w-32">
+        <FieldLabel htmlFor="time-picker-optional">Time</FieldLabel>
+        <Input
+          type="time"
+          id="time-picker-optional"
+          step="1"
+          defaultValue={`${date?.getHours()}:${date?.getMinutes()}:${date?.getSeconds()}`}
+          className="appearance-none bg-background [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+        />
+      </Field>
+    </FieldGroup>
   );
 }

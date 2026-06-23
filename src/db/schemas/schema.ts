@@ -1,7 +1,5 @@
 import {
   bigint,
-  boolean,
-  foreignKey,
   index,
   jsonb,
   numeric,
@@ -24,12 +22,7 @@ export const profile = pgTable.withRLS(
     id: uuid().primaryKey(),
     createdAt: timestamp("created_at").defaultNow(),
   },
-  (table) => [
-    foreignKey({
-      columns: [table.id],
-      foreignColumns: [authUsers.id],
-      name: "profiles_id_fkey",
-    }).onDelete("cascade"),
+  () => [
     pgPolicy("owned entity access", {
       as: "permissive",
       for: "all",
@@ -53,7 +46,7 @@ export const entry = pgTable.withRLS(
       .notNull(),
     comment: text(),
   },
-  (table) => [
+  () => [
     pgPolicy("own_entries", {
       to: ["authenticated"],
       using: sql`(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text))`,
@@ -172,7 +165,7 @@ export const trackingDefault = pgTable.withRLS(
       .references(() => metric.id, { onDelete: "cascade" }),
     baseline: numeric().notNull(),
   },
-  (table) => [
+  () => [
     pgPolicy("select_tracking_defaults", {
       for: "select",
       to: ["anon", "authenticated"],

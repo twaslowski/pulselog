@@ -3,7 +3,7 @@ import { MetricSchema } from "@/types/metric";
 
 export const EntryValueSchema = z.object({
   value: z.number(),
-  metric_id: z.string(),
+  metricId: z.string(),
 });
 
 export const EntryValueWithMetricSchema = EntryValueSchema.extend({

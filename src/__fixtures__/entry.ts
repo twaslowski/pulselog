@@ -10,12 +10,12 @@ export const entry: Entry = {
   updated_timestamp: new Date(),
   values: [
     {
-      metric_id: mood.id,
+      metricId: mood.id,
       value: 0,
       metric: mood,
     },
     {
-      metric_id: sleep.id,
+      metricId: sleep.id,
       value: 8,
       metric: sleep,
     },

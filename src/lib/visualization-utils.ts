@@ -157,7 +157,7 @@ export function prepareMonthlyChartData(
 
   // Get all metric IDs present in entries
   const metricIds = Array.from(
-    new Set(entries.flatMap((e) => e.values.map((v) => v.metric_id))),
+    new Set(entries.flatMap((e) => e.values.map((v) => v.metricId))),
   );
 
   // Group by day and metric, collecting all values per day
@@ -171,10 +171,10 @@ export function prepareMonthlyChartData(
     }
     const dayData = dailyData.get(dateKey)!;
     entry.values.forEach((value) => {
-      if (!dayData.has(value.metric_id)) {
-        dayData.set(value.metric_id, []);
+      if (!dayData.has(value.metricId)) {
+        dayData.set(value.metricId, []);
       }
-      dayData.get(value.metric_id)!.push(value.value);
+      dayData.get(value.metricId)!.push(value.value);
     });
   });
 

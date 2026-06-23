@@ -23,47 +23,6 @@ export const deleteEntry = async (entryId: number) => {
   revalidatePath("/protected/insights");
 };
 
-export const createEntry = async (
-  createEntryInput: CreateEntryInput,
-): Promise<string> => {
-  const supabase = await createClient();
-  const userId = await getUserId(supabase);
-
-  const { data: entryData, error: entryError } = await supabase
-    .from("entry")
-    .insert({
-      user_id: userId,
-      recorded_at: createEntryInput.recorded_at,
-      comment: createEntryInput.comment,
-    })
-    .select("id")
-    .single();
-
-  if (entryError || !entryData) {
-    throw new Error("Failed to create entry: " + entryError?.message);
-  }
-
-  const entryId = entryData.id;
-
-  const valuesToInsert = createEntryInput.values.map((value) => ({
-    entry_id: entryId,
-    metric_id: value.metric_id,
-    value: value.value,
-  }));
-
-  const { error: valuesError } = await supabase
-    .from("entry_value")
-    .insert(valuesToInsert);
-
-  if (valuesError) {
-    // Rollback: delete the created entry if inserting values fails
-    await supabase.from("entry").delete().eq("id", entryId);
-    throw new Error("Failed to create entry values: " + valuesError.message);
-  }
-
-  return entryId;
-};
-
 export const updateEntry = async (
   entryId: number,
   updateEntryInput: CreateEntryInput,
@@ -75,7 +34,7 @@ export const updateEntry = async (
   const { error: entryError } = await supabase
     .from("entry")
     .update({
-      recorded_at: updateEntryInput.recorded_at,
+      recorded_at: updateEntryInput.recordedAt.toISOString(),
       comment: updateEntryInput.comment,
     })
     .eq("id", entryId)
@@ -98,7 +57,7 @@ export const updateEntry = async (
   // Insert new entry values
   const valuesToInsert = updateEntryInput.values.map((value) => ({
     entry_id: entryId,
-    metric_id: value.metric_id,
+    metric_id: value.metricId,
     value: value.value,
   }));
 

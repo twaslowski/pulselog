@@ -47,7 +47,7 @@ export default defineConfig({
       testIgnore: /auth\.setup\.ts/,
       testDir: "./e2e/tests",
       dependencies: ["setup"],
-      grep: new RegExp(".*")
+      grep: new RegExp(".*"),
     },
     {
       name: "firefox",

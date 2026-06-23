@@ -16,11 +16,11 @@ export const EntrySchema = z.object({
 });
 
 export const CreateEntryInputSchema = z.object({
-  recorded_at: isoDateString,
+  recordedAt: isoDateString.pipe(z.coerce.date()),
   comment: z.string(),
   values: z.array(
     z.object({
-      metric_id: z.string(),
+      metricId: z.string(),
       value: z.number(),
     }),
   ),

@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
-import Image from "next/image";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
 
 export default function Error({
   error,
+  reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
@@ -15,23 +17,17 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <div className="flex flex-col items-center justify-center gap-6">
-          <Image
-            src="/images/moody-sad.png"
-            alt="sad moody"
-            height={128}
-            width={128}
-          />
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl">
-                Sorry, something went wrong :(
-              </CardTitle>
-            </CardHeader>
-          </Card>
-        </div>
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4">
+      <h1 className="text-4xl font-bold">Unknown error</h1>
+      <h2 className="text-2xl font-semibold">Something went wrong.</h2>
+      <div className="px-4" />
+      <div className="flex gap-4">
+        <Button onClick={reset} size="lg">
+          Try again
+        </Button>
+        <Button asChild className="rounded-md px-4 py-2 " size="lg">
+          <Link href="/protected">Back to Dashboard</Link>
+        </Button>
       </div>
     </div>
   );

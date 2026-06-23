@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { type MetricTracking } from "@/types/tracking";
 import { type EntryValue, EntryValueSchema } from "@/types/entry-value";
-import DateTimeInput from "@/components/entry/creation/datetime-input";
+import { DatePicker } from "@/components/entry/creation/datetime-input";
 import ValueSelect from "@/components/entry/value-select";
 import { AdditionalMetricPicker } from "@/components/entry/creation/additional-metric-picker";
 import { Metric } from "@/types/metric";
@@ -12,7 +12,7 @@ import { XIcon, Save, X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
-import { createEntry } from "@/app/actions/entry";
+import { createEntry } from "@/lib/entry";
 import toast, { CheckmarkIcon } from "react-hot-toast";
 
 interface CreateEntryFormProps {
@@ -23,9 +23,7 @@ export default function EntryCreationForm({
   trackedMetrics,
 }: CreateEntryFormProps) {
   const router = useRouter();
-  const [recordedAt, setRecordedAt] = useState(
-    new Date().toISOString().slice(0, 16),
-  );
+  const [recordedAt, setRecordedAt] = useState<Date>(new Date());
   const [submittedValues, setSubmittedValues] = useState<
     Record<string, number>
   >({});
@@ -65,7 +63,7 @@ export default function EntryCreationForm({
       .filter(([value]) => value !== undefined)
       .map(([metricId, value]) =>
         EntryValueSchema.parse({
-          metric_id: metricId,
+          metricId: metricId,
           value: value,
         }),
       );
@@ -88,12 +86,12 @@ export default function EntryCreationForm({
       await createEntry({
         comment,
         values: entryValues,
-        recorded_at: recordedAt,
+        recordedAt: recordedAt,
       });
       router.push("/protected");
       toast("Success!", {
-        icon: <CheckmarkIcon />
-      })
+        icon: <CheckmarkIcon />,
+      });
     } catch (error) {
       console.error(error);
       toast.error("Failed to create entry. Please try again.");
@@ -106,7 +104,7 @@ export default function EntryCreationForm({
 
   return (
     <div className="bg-primary-foreground/90 rounded-2xl shadow-xl p-8 max-h-75vh overflow-y-auto">
-      <DateTimeInput value={recordedAt} onChange={setRecordedAt} />
+      <DatePicker onChange={setRecordedAt} />
 
       <div className="border border-primary/70 my-8" />
 
@@ -169,7 +167,7 @@ export default function EntryCreationForm({
           <Save className="w-5 h-5" />
           Save Entry
         </Button>
-        <Button onClick={handleCancel} className="">
+        <Button onClick={handleCancel}>
           <X className="w-5 h-5" aria-label="cancel" />
           Cancel
         </Button>

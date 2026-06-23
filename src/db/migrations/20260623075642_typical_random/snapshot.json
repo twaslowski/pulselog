@@ -2,9 +2,7 @@
   "version": "8",
   "dialect": "postgres",
   "id": "196c3e8a-55ff-48da-9b1e-bb46a6e425a7",
-  "prevIds": [
-    "d4f4dd2c-0d8e-47f6-94b0-7ddb3e3fbd7d"
-  ],
+  "prevIds": ["d4f4dd2c-0d8e-47f6-94b0-7ddb3e3fbd7d"],
   "ddl": [
     {
       "isRlsEnabled": true,
@@ -447,14 +445,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "entry_id"
-      ],
+      "columns": ["entry_id"],
       "schemaTo": "public",
       "tableTo": "entry",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "entry_value_entry_id_entry_id_fkey",
@@ -464,14 +458,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "metric_id"
-      ],
+      "columns": ["metric_id"],
       "schemaTo": "public",
       "tableTo": "metric",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "entry_value_metric_id_metric_id_fkey",
@@ -481,14 +471,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "metric_id"
-      ],
+      "columns": ["metric_id"],
       "schemaTo": "public",
       "tableTo": "metric",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "metric_tracking_metric_id_metric_id_fkey",
@@ -498,14 +484,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "metric_id"
-      ],
+      "columns": ["metric_id"],
       "schemaTo": "public",
       "tableTo": "metric",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "name": "tracking_default_metric_id_metric_id_fkey",
@@ -514,10 +496,7 @@
       "table": "tracking_default"
     },
     {
-      "columns": [
-        "entry_id",
-        "metric_id"
-      ],
+      "columns": ["entry_id", "metric_id"],
       "nameExplicit": true,
       "name": "entry_value_pkey",
       "entityType": "pks",
@@ -525,10 +504,7 @@
       "table": "entry_value"
     },
     {
-      "columns": [
-        "user_id",
-        "metric_id"
-      ],
+      "columns": ["user_id", "metric_id"],
       "nameExplicit": true,
       "name": "metric_tracking_pkey",
       "entityType": "pks",
@@ -536,9 +512,7 @@
       "table": "metric_tracking"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "entry_pkey",
       "schema": "public",
@@ -546,9 +520,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "metric_pkey",
       "schema": "public",
@@ -556,9 +528,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "metric_id"
-      ],
+      "columns": ["metric_id"],
       "nameExplicit": false,
       "name": "tracking_default_pkey",
       "schema": "public",
@@ -567,10 +537,7 @@
     },
     {
       "nameExplicit": true,
-      "columns": [
-        "name",
-        "owner_id"
-      ],
+      "columns": ["name", "owner_id"],
       "nullsNotDistinct": false,
       "name": "uq_metric_name_user_id",
       "entityType": "uniques",
@@ -580,9 +547,7 @@
     {
       "as": "PERMISSIVE",
       "for": "ALL",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text))",
       "withCheck": "(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text))",
       "name": "own_entries",
@@ -593,9 +558,7 @@
     {
       "as": "PERMISSIVE",
       "for": "ALL",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "((( SELECT auth.uid() AS uid) IS NOT NULL) AND (entry_id IN ( SELECT entry.id\n   FROM entry\n  WHERE ((entry.user_id)::text = ((( SELECT auth.uid() AS uid))::character varying)::text))))",
       "withCheck": "((( SELECT auth.uid() AS uid) IS NOT NULL) AND (entry_id IN ( SELECT entry.id\n   FROM entry\n  WHERE ((entry.user_id)::text = ((( SELECT auth.uid() AS uid))::character varying)::text))))",
       "name": "own_entry_values",
@@ -606,9 +569,7 @@
     {
       "as": "PERMISSIVE",
       "for": "ALL",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((auth.uid())::character varying)::text = (owner_id)::text))",
       "withCheck": "((( SELECT (auth.uid())::character varying AS uid))::text = (owner_id)::text)",
       "name": "insert_own_metrics",
@@ -619,9 +580,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "using": "((owner_id)::text = 'SYSTEM'::text)",
       "withCheck": null,
       "name": "select_system_metrics",
@@ -632,9 +591,7 @@
     {
       "as": "PERMISSIVE",
       "for": "ALL",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text))",
       "withCheck": "(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text))",
       "name": "own_metric_tracking",
@@ -645,10 +602,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "anon",
-        "authenticated"
-      ],
+      "roles": ["anon", "authenticated"],
       "using": "true",
       "withCheck": null,
       "name": "select_tracking_defaults",

@@ -15,22 +15,20 @@ test.describe(`Sign-up`, () => {
     await page.getByRole("button", { name: "create-metric" }).click();
 
     await page.getByLabel("name").fill(metricName);
-    await page.getByText("Next").click()
+    await page.getByText("Next").click();
 
     await page.getByLabel("description").fill("anxiety levels today");
     await page.getByText("Next").click();
 
-    await page.getByLabel("continuous").click()
+    await page.getByLabel("continuous").click();
 
-    await page.getByLabel("set-min-value").fill("0")
-    await page.getByLabel("set-max-value").fill("10")
+    await page.getByLabel("set-min-value").fill("0");
+    await page.getByLabel("set-max-value").fill("10");
 
-    await page.getByLabel("submit-metric").click()
+    await page.getByLabel("submit-metric").click();
 
-    await page.getByRole("tab", {name: "user"}).click();
+    await page.getByRole("tab", { name: "user" }).click();
 
-    await expect(
-          page.getByText(new RegExp(metricName, "i")),
-    ).toBeVisible();
+    await expect(page.getByText(new RegExp(metricName, "i"))).toBeVisible();
   });
 });

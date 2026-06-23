@@ -74,10 +74,10 @@ export default function EntriesLineChart({
       }
       const dayData = dailyData.get(dateKey)!;
       entry.values.forEach((value) => {
-        if (!dayData.has(value.metric_id)) {
-          dayData.set(value.metric_id, []);
+        if (!dayData.has(value.metricId)) {
+          dayData.set(value.metricId, []);
         }
-        dayData.get(value.metric_id)!.push(value.value);
+        dayData.get(value.metricId)!.push(value.value);
       });
     });
 

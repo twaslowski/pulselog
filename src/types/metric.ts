@@ -1,18 +1,12 @@
 import { z } from "zod";
+import { metric } from "@/db/schemas/schema";
+import { createSelectSchema } from "drizzle-zod";
 
 const MetricType = z.enum(["discrete", "continuous", "event"]);
 
-export const MetricSchema = z.object({
-  id: z.uuid(),
-  name: z.string(),
-  description: z.string(),
-  labels: z.record(z.string(), z.number()),
-  owner_id: z.string(),
-  creation_timestamp: z.string(),
-  update_timestamp: z.string(),
-  metric_type: MetricType,
-  min_value: z.number(),
-  max_value: z.number(),
+export const MetricSchema = createSelectSchema(metric).extend({
+  minValue: z.coerce.number(),
+  maxValue: z.coerce.number()
 });
 
 export const deriveHumanReadableMetricType = (metricType: MetricType) => {

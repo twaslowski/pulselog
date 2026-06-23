@@ -7,5 +7,9 @@ import { useMetricDialog } from "@/components/metric/metric-dialog-provider";
 export default function MetricCreationButton() {
   const { openCreateDialog } = useMetricDialog();
 
-  return <Button aria-label="create-metric" onClick={openCreateDialog}>+ Create Metric</Button>;
+  return (
+    <Button aria-label="create-metric" onClick={openCreateDialog}>
+      + Create Metric
+    </Button>
+  );
 }

@@ -43,7 +43,7 @@ export const POST = withApiHandler(
 export const GET = withApiHandler({}, async ({ profile }) => {
   const entries = await db.query.entry.findMany({
     where: { userId: profile.id },
-    with: { entryValues: true }
+    with: { entryValues: true },
   });
 
   console.log("entries", entries);

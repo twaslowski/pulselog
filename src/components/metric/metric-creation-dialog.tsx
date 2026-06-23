@@ -87,10 +87,10 @@ export default function MetricCreationDialog({
   const [formData, setFormData] = useState<MetricFormData>({
     name: metric?.name ?? "",
     description: metric?.description ?? "",
-    metricType: metric?.metric_type ?? null,
+    metricType: metric?.metricType ?? undefined,
     labels: metric?.labels ?? {},
-    minValue: metric?.min_value ?? null,
-    maxValue: metric?.max_value ?? null,
+    minValue: metric?.minValue ?? null,
+    maxValue: metric?.maxValue ?? null,
   });
 
   const totalSteps = 4;

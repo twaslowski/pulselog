@@ -89,8 +89,8 @@ export default function EntriesHeatmap({ entries }: HeatmapProps) {
             date: day,
             values: dayValues.map((v) => v.value),
             bounds: {
-              minValue: selectedMetric.min_value,
-              maxValue: selectedMetric.max_value,
+              minValue: selectedMetric.minValue,
+              maxValue: selectedMetric.maxValue,
             },
           });
         }

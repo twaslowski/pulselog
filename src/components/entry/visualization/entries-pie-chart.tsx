@@ -92,7 +92,7 @@ export default function EntriesPieChart({
     if (totalCount === 0) return [];
 
     // For discrete metrics, use labels; for continuous, round to reasonable precision
-    const isDiscrete = selectedMetric.metric.metric_type === "discrete";
+    const isDiscrete = selectedMetric.metric.metricType === "discrete";
     const labels = selectedMetric.metric.labels;
 
     const data: PieDataPoint[] = Array.from(valueCounts.entries())
@@ -205,8 +205,8 @@ export default function EntriesPieChart({
                     key={`cell-${index}`}
                     fill={getMoodColor(
                       entry.numericValue,
-                      selectedMetric?.metric.min_value ?? 0,
-                      selectedMetric?.metric.max_value ?? 10,
+                      selectedMetric?.metric.minValue ?? 0,
+                      selectedMetric?.metric.maxValue ?? 10,
                     )}
                   />
                 ))}

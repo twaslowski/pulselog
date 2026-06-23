@@ -2,18 +2,17 @@
 
 import React, { useState } from "react";
 import { type Entry } from "@/types/entry";
-import { type EntryValue, EntryValueSchema } from "@/types/entry-value";
+import { RawEntryValue, RawEntryValueSchema } from "@/types/entry-value";
 import { type Metric } from "@/types/metric";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { XIcon, Save } from "lucide-react";
+import { CheckIcon, Save, XIcon } from "lucide-react";
 import ValueSelect from "@/components/entry/value-select";
 import { updateEntry } from "@/app/actions/entry";
 import toast from "react-hot-toast";
 import { extractErrorMessage } from "@/lib/utils";
-import { CheckIcon } from "lucide-react";
 import { AdditionalMetricPicker } from "@/components/entry/creation/additional-metric-picker";
 import { DatePicker } from "@/components/entry/creation/datetime-input";
 
@@ -59,11 +58,11 @@ export default function EntryEditDialog({
     });
   };
 
-  const deriveEntryValues = (): EntryValue[] => {
+  const deriveEntryValues = (): RawEntryValue[] => {
     return Object.entries(submittedValues)
       .filter(([, value]) => value !== undefined)
       .map(([metricId, value]) =>
-        EntryValueSchema.parse({
+        RawEntryValueSchema.parse({
           metricId: metricId,
           value: value,
         }),

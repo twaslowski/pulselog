@@ -13,11 +13,14 @@ import { createSelectSchema } from "drizzle-zod";
 export const RawEntryValueSchema = z.object({
   metricId: z.string(),
   value: z.number(),
-})
+});
 
 export const EntryValueSelectSchema = createSelectSchema(entryValue);
 
-export const EntryValueSchema = EntryValueSelectSchema.extend({
+export const EntryValueSchema = EntryValueSelectSchema.pick({
+  metricId: true,
+  value: true,
+}).extend({
   metric: MetricSchema,
 });
 

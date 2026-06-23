@@ -10,36 +10,6 @@ export const deleteAccount = async () => {
   const supabase = await createClient();
   const userId = await getUserId(supabase);
 
-  // Delete all data associated with the user (cascade should handle this)
-  // But we'll explicitly delete related data for safety
-  const { error: entriesError } = await supabase
-    .from("entry")
-    .delete()
-    .eq("user_id", userId);
-
-  if (entriesError) {
-    throw new Error(`Failed to delete entries: ${entriesError.message}`);
-  }
-
-  const { error: metricsError } = await supabase
-    .from("metric")
-    .delete()
-    .eq("owner_id", userId);
-
-  if (metricsError) {
-    throw new Error(`Failed to delete metrics: ${metricsError.message}`);
-  }
-
-  const { error: trackingError } = await supabase
-    .from("metric_tracking")
-    .delete()
-    .eq("user_id", userId);
-
-  if (trackingError) {
-    throw new Error(`Failed to delete tracking data: ${trackingError.message}`);
-  }
-
-  // Delete the user from auth
   const { error: authError } = await supabase.auth.admin.deleteUser(userId);
 
   if (authError) {
@@ -79,7 +49,7 @@ export const exportUserData = async () => {
     },
     entries: entries,
     metrics: {
-      system: allMetrics.filter((m) => m.owner_id !== userId),
+      system: allMetrics.filter((m) => m.ownerId !== userId),
       userOwned: userMetrics,
     },
   };

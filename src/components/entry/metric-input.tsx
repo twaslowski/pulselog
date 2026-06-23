@@ -48,13 +48,13 @@ export default function MetricInput({
   };
 
   const renderContinuousInput = () => {
-    if (metric.min_value === null || metric.max_value === null) {
+    if (metric.minValue === null || metric.maxValue === null) {
       throw new Error(
         "Continuous metrics must have min and max values defined.",
       );
     }
 
-    return range(metric.min_value, metric.max_value).map((value) => (
+    return range(metric.minValue, metric.maxValue).map((value) => (
       <div
         key={value}
         onClick={() => onMetricSelect(metric.id, value)}
@@ -75,7 +75,7 @@ export default function MetricInput({
       <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
         {metric.name}
       </label>
-      {metric.metric_type === "discrete"
+      {metric.metricType === "discrete"
         ? renderDiscreteInput()
         : renderContinuousInput()}
     </div>

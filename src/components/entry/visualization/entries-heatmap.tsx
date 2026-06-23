@@ -9,8 +9,8 @@ import {
 } from "date-fns";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Entry } from "@/types/entry";
-import { Metric } from "@/types/metric.ts";
-import { Button } from "@/components/ui/button.tsx";
+import { Metric } from "@/types/metric";
+import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   extractAvailableMetrics,

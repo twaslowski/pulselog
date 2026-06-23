@@ -6,15 +6,15 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
-} from "@/components/ui/card.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { Input } from "@/components/ui/input.tsx";
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { XIcon, Search } from "lucide-react";
 import React, { useState, useMemo, useEffect } from "react";
-import { createClient } from "@/lib/supabase/client.ts";
-import { Metric, MetricSchema } from "@/types/metric.ts";
+import { createClient } from "@/lib/supabase/client";
+import { Metric, MetricSchema } from "@/types/metric";
 import { z } from "zod";
-import { MetricLabels } from "@/components/metric/metric-labels.tsx";
+import { MetricLabels } from "@/components/metric/metric-labels";
 
 export default function AdditionalMetricPickerDialog({
   onComplete,

@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { type MetricTracking } from "@/types/tracking";
-import { type EntryValue, EntryValueSchema } from "@/types/entry-value.ts";
+import { type EntryValue, EntryValueSchema } from "@/types/entry-value";
 import DateTimeInput from "@/components/entry/creation/datetime-input";
 import ValueSelect from "@/components/entry/value-select";
-import { AdditionalMetricPicker } from "@/components/entry/creation/additional-metric-picker.tsx";
-import { Metric } from "@/types/metric.ts";
-import { Button } from "@/components/ui/button.tsx";
+import { AdditionalMetricPicker } from "@/components/entry/creation/additional-metric-picker";
+import { Metric } from "@/types/metric";
+import { Button } from "@/components/ui/button";
 import { XIcon, Save, X } from "lucide-react";
-import { Label } from "@/components/ui/label.tsx";
-import { Input } from "@/components/ui/input.tsx";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { createEntry } from "@/app/actions/entry";
 import toast from "react-hot-toast";

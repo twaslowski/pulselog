@@ -1,9 +1,9 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { getUserId } from "@/lib/service/user.ts";
+import { getUserId } from "@/lib/service/user";
 import { revalidatePath } from "next/cache";
-import { MetricType } from "@/types/metric.ts";
+import { MetricType } from "@/types/metric";
 
 export const trackMetric = async (metricId: string, baseline: number = 0) => {
   const supabase = await createClient();

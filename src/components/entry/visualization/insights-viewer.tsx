@@ -9,7 +9,7 @@ import EntriesList from "./entries-list";
 import EntriesStats from "./entries-stats";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BarChart3, Calendar, List, TrendingUp } from "lucide-react";
-import useIsMobile from "@/hooks/use-is-mobile.ts";
+import useIsMobile from "@/hooks/use-is-mobile";
 
 type ViewType = "charts" | "heatmap" | "entries" | "stats";
 

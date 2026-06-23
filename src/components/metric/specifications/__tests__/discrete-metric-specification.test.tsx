@@ -366,6 +366,7 @@ describe("DiscreteMetricSpecification", () => {
       const call = mockOnSubmit.mock.calls[0][0];
 
       // Verify values are sequential from 1 to 5
+      // todo: compile error, but I believe this can be fixed when migrating away from server actions
       expect(Object.values(call).sort((a, b) => a - b)).toEqual([
         1, 2, 3, 4, 5,
       ]);

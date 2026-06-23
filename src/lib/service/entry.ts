@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { DBEntrySchema, type Entry } from "@/types/entry";
 import { z } from "zod";
-import { getUserId } from "@/lib/service/user.ts";
+import { getUserId } from "@/lib/service/user";
 
 export const getEntriesByUser = async (): Promise<Entry[]> => {
   const supabase = await createClient();

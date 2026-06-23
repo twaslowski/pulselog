@@ -1,9 +1,9 @@
 import React from "react";
-import { getAllMetrics, getTrackedMetrics } from "@/lib/service/metric.ts";
+import { getAllMetrics, getTrackedMetrics } from "@/lib/service/metric";
 import MetricList from "@/components/metric/metric-list";
 import { BackNav } from "@/components/back-nav";
 import MetricCreationButton from "@/components/metric/metric-creation-button";
-import { MetricDialogProvider } from "@/components/metric/metric-dialog-provider.tsx";
+import { MetricDialogProvider } from "@/components/metric/metric-dialog-provider";
 
 export default async function SettingsPage() {
   const [allMetrics, trackedMetrics] = await Promise.all([

@@ -1,5 +1,5 @@
 import React from "react";
-import { getTrackedMetrics } from "@/lib/service/metric.ts";
+import { getTrackedMetrics } from "@/lib/service/metric";
 import EntryCreationForm from "@/components/entry/creation/entry-creation-form";
 import { BackNav } from "@/components/back-nav";
 

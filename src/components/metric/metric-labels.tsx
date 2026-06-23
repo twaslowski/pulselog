@@ -2,8 +2,8 @@ import {
   deriveHumanReadableMetricType,
   Metric,
   MetricType,
-} from "@/types/metric.ts";
-import { Badge } from "@/components/ui/badge.tsx";
+} from "@/types/metric";
+import { Badge } from "@/components/ui/badge";
 import React from "react";
 
 interface MetricLabelProps {

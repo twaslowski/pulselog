@@ -13,20 +13,20 @@ import { Label } from "@/components/ui/label";
 import ValueSelect from "@/components/entry/value-select";
 import { Metric } from "@/types/metric";
 import { MetricTracking } from "@/types/tracking";
-import { MetricLabels } from "@/components/metric/metric-labels.tsx";
+import { MetricLabels } from "@/components/metric/metric-labels";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu.tsx";
-import { Button } from "@/components/ui/button.tsx";
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import { EllipsisIcon, TrashIcon, CheckIcon, Edit3Icon } from "lucide-react";
-import { deleteMetric } from "@/app/actions/metric.ts";
-import { extractErrorMessage } from "@/lib/utils.ts";
+import { deleteMetric } from "@/app/actions/metric";
+import { extractErrorMessage } from "@/lib/utils";
 import toast from "react-hot-toast";
-import { useMetricDialog } from "@/components/metric/metric-dialog-provider.tsx";
-import { useIsMobile } from "@/hooks/use-is-mobile.ts";
+import { useMetricDialog } from "@/components/metric/metric-dialog-provider";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 
 interface MetricCardProps {
   metric: Metric;

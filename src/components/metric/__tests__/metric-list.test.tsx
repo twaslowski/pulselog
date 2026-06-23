@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import MetricList from "../metric-list";
-import { MetricDialogProvider } from "../metric-dialog-provider.tsx";
+import { MetricDialogProvider } from "../metric-dialog-provider";
 import {
   mood,
   sleep,
@@ -17,7 +17,7 @@ import {
   untrackMetric,
   updateBaseline,
 } from "@/app/actions/metric";
-import { deriveHumanReadableMetricType } from "@/types/metric.ts";
+import { deriveHumanReadableMetricType } from "@/types/metric";
 
 // Mock the server actions
 jest.mock("@/app/actions/metric", () => ({

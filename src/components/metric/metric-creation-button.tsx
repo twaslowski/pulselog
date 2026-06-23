@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { useMetricDialog } from "@/components/metric/metric-dialog-provider.tsx";
+import { useMetricDialog } from "@/components/metric/metric-dialog-provider";
 
 export default function MetricCreationButton() {
   const { openCreateDialog } = useMetricDialog();

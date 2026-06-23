@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { type Entry } from "@/types/entry";
-import { type EntryValue, EntryValueSchema } from "@/types/entry-value.ts";
-import { type Metric } from "@/types/metric.ts";
+import { type EntryValue, EntryValueSchema } from "@/types/entry-value";
+import { type Metric } from "@/types/metric";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,7 +14,7 @@ import { updateEntry } from "@/app/actions/entry";
 import toast from "react-hot-toast";
 import { extractErrorMessage } from "@/lib/utils";
 import { CheckIcon } from "lucide-react";
-import { AdditionalMetricPicker } from "@/components/entry/creation/additional-metric-picker.tsx";
+import { AdditionalMetricPicker } from "@/components/entry/creation/additional-metric-picker";
 
 interface EntryEditDialogProps {
   entry: Entry;

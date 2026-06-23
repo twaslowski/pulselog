@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { Entry } from "../visualization/entry";
 import { mood, sleep } from "@/__fixtures__/metric";
-import { EntryValueWithMetric } from "@/types/entry-value.ts";
+import { EntryValueWithMetric } from "@/types/entry-value";
 
 const entry = {
   id: 123,

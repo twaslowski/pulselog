@@ -1,13 +1,13 @@
-import { getEntriesByUser } from "@/lib/service/entry.ts";
+import { getEntriesByUser } from "@/lib/service/entry";
 import React from "react";
 import { BackNav } from "@/components/back-nav";
-import { getTrackedMetrics } from "@/lib/service/metric.ts";
+import { getTrackedMetrics } from "@/lib/service/metric";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card.tsx";
+} from "@/components/ui/card";
 import InsightsViewer from "@/components/entry/visualization/insights-viewer";
 
 export default async function InsightsPage() {

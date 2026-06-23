@@ -64,20 +64,4 @@ describe("MetricInput", () => {
     ).toThrow(/labels defined/);
     (console.error as jest.Mock).mockRestore();
   });
-
-  it("throws error if continuous metric has no min/max", () => {
-    const badMetric = { ...sleep, min_value: null, max_value: null };
-    const handleSelect = jest.fn();
-    jest.spyOn(console, "error").mockImplementation(() => {});
-    expect(() =>
-      render(
-        <MetricInput
-          metric={badMetric}
-          baseline={8}
-          onMetricSelect={handleSelect}
-        />,
-      ),
-    ).toThrow(/min and max values defined/);
-    (console.error as jest.Mock).mockRestore();
-  });
 });

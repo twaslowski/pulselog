@@ -3,7 +3,7 @@
 import React from "react";
 import { Save, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { type EntryValue } from "@/types/entry-value.ts";
+import { type EntryValue } from "@/types/entry-value";
 import { createEntry } from "@/app/actions/entry";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";

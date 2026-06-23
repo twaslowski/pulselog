@@ -1,6 +1,6 @@
 import { MessageSquareTextIcon } from "lucide-react";
 import { Root, Trigger, Content } from "@radix-ui/react-hover-card";
-import { Badge } from "@/components/ui/badge.tsx";
+import { Badge } from "@/components/ui/badge";
 
 export function EntryComment({ comment }: { comment: string }) {
   return (

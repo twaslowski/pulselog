@@ -40,7 +40,7 @@ export function SignUpForm({
 
     try {
       await signUpWithEmail(email, password);
-      router.push("/auth/sign-up-success");
+      router.push("/protected");
     } catch (error: unknown) {
       setError(
         error instanceof Error

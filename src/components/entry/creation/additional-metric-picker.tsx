@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
 import React from "react";
-import AdditionalMetricPickerDialog from "@/components/entry/creation/additional-metric-picker-dialog.tsx";
-import { Metric } from "@/types/metric.ts";
+import AdditionalMetricPickerDialog from "@/components/entry/creation/additional-metric-picker-dialog";
+import { Metric } from "@/types/metric";
 
 export function AdditionalMetricPicker({
   addAdditionalMetric,

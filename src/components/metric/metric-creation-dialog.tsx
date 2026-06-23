@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { createMetric, updateMetric } from "@/app/actions/metric";
-import { MetricType, Metric } from "@/types/metric.ts";
+import { MetricType, Metric } from "@/types/metric";
 import {
   HashIcon,
   LucideIcon,

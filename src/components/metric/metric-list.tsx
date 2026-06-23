@@ -9,7 +9,7 @@ import {
 } from "@/app/actions/metric";
 import React, { useState, useTransition, useMemo } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import MetricCard from "@/components/metric/metric-card.tsx";
+import MetricCard from "@/components/metric/metric-card";
 
 interface MetricListProps {
   metrics: Metric[];

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { EntryValueWithMetricSchema } from "@/types/entry-value.ts";
+import { EntryValueWithMetricSchema } from "@/types/entry-value";
 
 const isoDateString = z.iso.datetime({ offset: true });
 

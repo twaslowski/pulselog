@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { getUserId } from "@/lib/service/user.ts";
+import { getUserId } from "@/lib/service/user";
 import { redirect } from "next/navigation";
 import { getEntriesByUser } from "@/lib/service/entry";
 import { getAllMetrics } from "@/lib/service/metric";

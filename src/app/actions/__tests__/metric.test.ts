@@ -1,13 +1,13 @@
 import { createMetric } from "../metric";
 import { createClient } from "@/lib/supabase/server";
 import { MetricType } from "@/types/metric";
-import { getUserId } from "@/lib/service/user.ts";
+import { getUserId } from "@/lib/service/user";
 
 jest.mock("@/lib/supabase/server");
 jest.mock("next/cache", () => ({
   revalidatePath: jest.fn(),
 }));
-jest.mock("@/lib/service/user.ts");
+jest.mock("@/lib/service/user");
 
 describe("createMetric", () => {
   const mockInsert = jest.fn();

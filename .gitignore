@@ -36,6 +36,7 @@ yarn-error.log*
 .env.dev
 .env.prod
 *.secret.tfvars
+drizzle-prod.config.ts
 
 .idea
 

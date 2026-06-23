@@ -67,7 +67,7 @@ export default function ContinuousMetricSpecification({
         <Button onClick={onBack} variant="outline">
           Back
         </Button>
-        <Button onClick={handleSubmit} disabled={!canProceed || isSubmitting}>
+        <Button aria-label="create-metric" onClick={handleSubmit} disabled={!canProceed || isSubmitting}>
           {isSubmitting ? "Creating..." : "Create Metric"}
         </Button>
       </div>

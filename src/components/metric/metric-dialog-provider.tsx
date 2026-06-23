@@ -4,6 +4,8 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 import MetricCreationDialog from "@/components/metric/metric-creation-dialog";
 import { Metric } from "@/types/metric";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { CheckIcon } from "lucide-react";
 
 interface MetricDialogContextType {
   openCreateDialog: () => void;
@@ -40,6 +42,9 @@ export function MetricDialogProvider({ children }: { children: ReactNode }) {
 
   const handleComplete = () => {
     closeDialog();
+    toast("Success!", {
+      icon: <CheckIcon />,
+    });
     router.refresh();
   };
 

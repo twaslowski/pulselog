@@ -211,6 +211,7 @@ export default function MetricCreationDialog({
             <div className="space-y-3">
               {METRIC_TYPE_DEFINITIONS.map((metricTypeDef) => (
                 <Card
+                  aria-label={`choose-type-${metricTypeDef.type}`}
                   key={metricTypeDef.type}
                   className="cursor-pointer hover:border-primary transition-colors"
                   onClick={() => handleMetricTypeSelection(metricTypeDef.type)}

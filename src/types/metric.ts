@@ -4,10 +4,7 @@ import { createSelectSchema } from "drizzle-zod";
 
 const MetricType = z.enum(["discrete", "continuous", "event"]);
 
-export const MetricSchema = createSelectSchema(metric).extend({
-  minValue: z.coerce.number(),
-  maxValue: z.coerce.number()
-});
+export const MetricSchema = createSelectSchema(metric);
 
 export const deriveHumanReadableMetricType = (metricType: MetricType) => {
   switch (metricType) {

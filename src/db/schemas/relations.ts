@@ -7,6 +7,10 @@ export const relations = defineRelations(schema, (r) => ({
       from: r.entry.id.through(r.entryValue.entryId),
       to: r.metric.id.through(r.entryValue.metricId),
     }),
+    entryValues: r.many.entryValue({
+      from: r.entry.id,
+      to: r.entryValue.entryId,
+    }),
   },
   // For documentational purposes only: This relation is not used or required in the codebase.
   // profile: {

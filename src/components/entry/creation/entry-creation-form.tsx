@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { type MetricTracking } from "@/types/tracking";
-import { type EntryValue, EntryValueSchema } from "@/types/entry-value";
+import { RawEntryValue, RawEntryValueSchema } from "@/types/entry-value";
 import { DatePicker } from "@/components/entry/creation/datetime-input";
 import ValueSelect from "@/components/entry/value-select";
 import { AdditionalMetricPicker } from "@/components/entry/creation/additional-metric-picker";
 import { Metric } from "@/types/metric";
 import { Button } from "@/components/ui/button";
-import { XIcon, Save, X } from "lucide-react";
+import { Save, X, XIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
@@ -58,11 +58,11 @@ export default function EntryCreationForm({
     }));
   };
 
-  const deriveEntryValues = (): EntryValue[] => {
+  const deriveEntryValues = (): RawEntryValue[] => {
     return Object.entries(submittedValues)
       .filter(([value]) => value !== undefined)
       .map(([metricId, value]) =>
-        EntryValueSchema.parse({
+        RawEntryValueSchema.parse({
           metricId: metricId,
           value: value,
         }),

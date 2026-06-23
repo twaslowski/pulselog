@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { EntryValueWithMetricSchema } from "@/types/entry-value";
+import { EntryValueSchema } from "@/types/entry-value";
 
 const isoDateString = z.iso.datetime({ offset: true });
 
@@ -12,7 +12,7 @@ export const EntrySchema = z.object({
   comment: z.string(),
   creation_timestamp: isoDateString.pipe(z.coerce.date()),
   updated_timestamp: isoDateString.pipe(z.coerce.date()),
-  values: z.array(EntryValueWithMetricSchema),
+  values: z.array(EntryValueSchema),
 });
 
 export const CreateEntryInputSchema = z.object({
@@ -35,7 +35,7 @@ export const DBEntrySchema = z
     recorded_at: isoDateString.pipe(z.coerce.date()),
     creation_timestamp: isoDateString.pipe(z.coerce.date()),
     updated_timestamp: isoDateString.pipe(z.coerce.date()),
-    entry_value: z.array(EntryValueWithMetricSchema),
+    entry_value: z.array(EntryValueSchema),
   })
   .transform(({ entry_value, ...rest }) => ({
     ...rest,

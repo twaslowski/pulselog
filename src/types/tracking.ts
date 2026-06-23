@@ -3,10 +3,7 @@ import { createSelectSchema } from "drizzle-zod";
 import { metricTracking } from "@/db/schemas/schema";
 import { MetricSchema } from "@/types/metric";
 
-export const MetricTrackingSelectSchema = createSelectSchema(metricTracking)
-  .extend({
-    baseline: z.coerce.number()
-  });
+export const MetricTrackingSelectSchema = createSelectSchema(metricTracking);
 
 export const MetricTrackingSchema = MetricTrackingSelectSchema.pick({
   userId: true,

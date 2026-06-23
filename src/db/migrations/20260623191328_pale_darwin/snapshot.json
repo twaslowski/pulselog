@@ -1,0 +1,735 @@
+{
+  "version": "8",
+  "dialect": "postgres",
+  "id": "fc8c3d9a-92d5-4214-8c41-6a10686318dc",
+  "prevIds": [
+    "91e5b999-9951-492c-b93e-02aaab8fe4b9"
+  ],
+  "ddl": [
+    {
+      "isRlsEnabled": true,
+      "name": "entry",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "entry_value",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "metric",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "metric_tracking",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "profile",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "tracking_default",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "entry"
+    },
+    {
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "user_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "entry"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "recorded_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "entry"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "creation_timestamp",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "entry"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_timestamp",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "entry"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "comment",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "entry"
+    },
+    {
+      "type": "bigint",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "entry_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "entry_value"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "metric_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "entry_value"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "value",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "entry_value"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "description",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "type": "jsonb",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "labels",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "type": "varchar(36)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'SYSTEM'",
+      "generated": null,
+      "identity": null,
+      "name": "owner_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "creation_timestamp",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "update_timestamp",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "type": "varchar(50)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "metric_type",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "min_value",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "max_value",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "user_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric_tracking"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "metric_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric_tracking"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "baseline",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric_tracking"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "tracked_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "metric_tracking"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "profile"
+    },
+    {
+      "type": "timestamp",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "profile"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "metric_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "tracking_default"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "baseline",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "tracking_default"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "metric_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "idx_entry_value_metric_id",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "entry_value"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "owner_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "idx_metric_owner_id",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "metric_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "idx_metric_tracking_metric_id",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "metric_tracking"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "user_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "idx_metric_tracking_user_id",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "metric_tracking"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "entry_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "entry",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "name": "entry_value_entry_id_entry_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "entry_value"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "metric_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "metric",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "name": "entry_value_metric_id_metric_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "entry_value"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "metric_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "metric",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "name": "metric_tracking_metric_id_metric_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "metric_tracking"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "schemaTo": "auth",
+      "tableTo": "users",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "name": "profile_id_users_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "profile"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "metric_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "metric",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "name": "tracking_default_metric_id_metric_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "tracking_default"
+    },
+    {
+      "columns": [
+        "entry_id",
+        "metric_id"
+      ],
+      "nameExplicit": true,
+      "name": "entry_value_pkey",
+      "entityType": "pks",
+      "schema": "public",
+      "table": "entry_value"
+    },
+    {
+      "columns": [
+        "user_id",
+        "metric_id"
+      ],
+      "nameExplicit": true,
+      "name": "metric_tracking_pkey",
+      "entityType": "pks",
+      "schema": "public",
+      "table": "metric_tracking"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "entry_pkey",
+      "schema": "public",
+      "table": "entry",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "metric_pkey",
+      "schema": "public",
+      "table": "metric",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "profile_pkey",
+      "schema": "public",
+      "table": "profile",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "metric_id"
+      ],
+      "nameExplicit": false,
+      "name": "tracking_default_pkey",
+      "schema": "public",
+      "table": "tracking_default",
+      "entityType": "pks"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "name",
+        "owner_id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "uq_metric_name_user_id",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "ALL",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text))",
+      "withCheck": "(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text))",
+      "name": "own_entries",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "entry"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "ALL",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "((( SELECT auth.uid() AS uid) IS NOT NULL) AND (entry_id IN ( SELECT entry.id\n   FROM entry\n  WHERE ((entry.user_id)::text = ((( SELECT auth.uid() AS uid))::character varying)::text))))",
+      "withCheck": "((( SELECT auth.uid() AS uid) IS NOT NULL) AND (entry_id IN ( SELECT entry.id\n   FROM entry\n  WHERE ((entry.user_id)::text = ((( SELECT auth.uid() AS uid))::character varying)::text))))",
+      "name": "own_entry_values",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "entry_value"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "ALL",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((auth.uid())::character varying)::text = (owner_id)::text))",
+      "withCheck": "((( SELECT (auth.uid())::character varying AS uid))::text = (owner_id)::text)",
+      "name": "insert_own_metrics",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "public"
+      ],
+      "using": "((owner_id)::text = 'SYSTEM'::text)",
+      "withCheck": null,
+      "name": "select_system_metrics",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "metric"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "ALL",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text))",
+      "withCheck": "(((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text))",
+      "name": "own_metric_tracking",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "metric_tracking"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "ALL",
+      "roles": [
+        "public"
+      ],
+      "using": "(( SELECT auth.uid() AS uid) = id)",
+      "withCheck": null,
+      "name": "owned entity access",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "profile"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "anon",
+        "authenticated"
+      ],
+      "using": "true",
+      "withCheck": null,
+      "name": "select_tracking_defaults",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "tracking_default"
+    }
+  ],
+  "renames": [
+    "public.profile.profiles_id_fkey->public.profile.profile_id_users_id_fkey"
+  ]
+}

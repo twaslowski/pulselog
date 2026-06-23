@@ -98,11 +98,11 @@ export function buildMetricConfigs(
 ): MetricConfig[] {
   return trackingData.map((td, index) => ({
     metricId: td.metric.id,
-    minValue: td.metric.min_value ?? 0,
-    maxValue: td.metric.max_value ?? 10,
+    minValue: td.metric.minValue ?? 0,
+    maxValue: td.metric.maxValue ?? 10,
     baseline: td.baseline,
     name: td.metric.name,
-    type: td.metric.metric_type,
+    type: td.metric.metricType,
     labels: td.metric.labels,
     color: assignMetricColor(index),
   }));

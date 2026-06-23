@@ -11,13 +11,13 @@ interface ValueSelectProps {
 }
 
 function getMetricOptions(metric: Metric): { label: string; value: number }[] {
-  if (metric.metric_type === "discrete") {
+  if (metric.metricType === "discrete") {
     if (!metric.labels) return [];
     return Object.entries(metric.labels)
       .sort((a, b) => b[1] - a[1])
       .map(([label, value]) => ({ label, value }));
   }
-  if (metric.metric_type === "event") {
+  if (metric.metricType === "event") {
     return [
       { label: "Happened", value: 1 },
       { label: "Didn't happen", value: 0 },
@@ -25,11 +25,11 @@ function getMetricOptions(metric: Metric): { label: string; value: number }[] {
   }
   // continuous metric
   if (
-    metric.min_value !== null &&
-    metric.max_value !== null &&
-    metric.min_value <= metric.max_value
+    metric.minValue !== null &&
+    metric.maxValue !== null &&
+    metric.minValue <= metric.maxValue
   ) {
-    return range(metric.min_value, metric.max_value).map((v) => ({
+    return range(metric.minValue, metric.maxValue).map((v) => ({
       label: String(v),
       value: v,
     }));

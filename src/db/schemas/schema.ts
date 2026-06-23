@@ -1,8 +1,7 @@
 import {
   bigint,
-  index,
+  index, integer,
   jsonb,
-  numeric,
   pgPolicy,
   pgTable,
   primaryKey,
@@ -19,7 +18,7 @@ import { authUsers } from "drizzle-orm/supabase";
 export const profile = pgTable.withRLS(
   "profile",
   {
-    id: uuid().primaryKey(),
+    id: uuid().primaryKey().references(() => authUsers.id, { onDelete: "cascade" }),
     createdAt: timestamp("created_at").defaultNow(),
   },
   () => [
@@ -64,7 +63,7 @@ export const entryValue = pgTable.withRLS(
     metricId: uuid("metric_id")
       .notNull()
       .references(() => metric.id, { onDelete: "cascade" }),
-    value: numeric().notNull(),
+    value: integer().notNull(),
   },
   (table) => [
     primaryKey({
@@ -103,8 +102,8 @@ export const metric = pgTable.withRLS(
       .default(sql`now()`)
       .notNull(),
     metricType: varchar("metric_type", { length: 50 }).notNull(),
-    minValue: numeric("min_value").notNull(),
-    maxValue: numeric("max_value").notNull(),
+    minValue: integer("min_value").notNull(),
+    maxValue: integer("max_value").notNull(),
   },
   (table) => [
     index("idx_metric_owner_id").using(
@@ -132,7 +131,7 @@ export const metricTracking = pgTable.withRLS(
     metricId: uuid("metric_id")
       .notNull()
       .references(() => metric.id, { onDelete: "cascade" }),
-    baseline: numeric().notNull(),
+    baseline: integer().notNull(),
     trackedAt: timestamp("tracked_at", { withTimezone: true }).notNull(),
   },
   (table) => [
@@ -163,7 +162,7 @@ export const trackingDefault = pgTable.withRLS(
     metricId: uuid("metric_id")
       .primaryKey()
       .references(() => metric.id, { onDelete: "cascade" }),
-    baseline: numeric().notNull(),
+    baseline: integer().notNull(),
   },
   () => [
     pgPolicy("select_tracking_defaults", {

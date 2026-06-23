@@ -27,8 +27,7 @@ export const POST = withApiHandler(
       db.insert(entryValue).values({
         entryId: entryId,
         metricId: v.metricId,
-        // todo: why is a string expected here??
-        value: v.value.toString(),
+        value: v.value,
       });
     });
 
@@ -42,10 +41,12 @@ export const POST = withApiHandler(
 );
 
 export const GET = withApiHandler({}, async ({ profile }) => {
-  const entries = await db
-    .select()
-    .from(entry)
-    .where(eq(entry.userId, profile.id));
+  const entries = await db.query.entry.findMany({
+    where: { userId: profile.id },
+    with: { entryValues: true }
+  });
 
-  return NextResponse.json(JSON.stringify(entries), { status: 200 });
+  console.log("entries", entries);
+
+  return NextResponse.json(entries, { status: 200 });
 });

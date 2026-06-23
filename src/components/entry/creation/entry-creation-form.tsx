@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { createEntry } from "@/app/actions/entry";
-import toast from "react-hot-toast";
+import toast, { CheckmarkIcon } from "react-hot-toast";
 
 interface CreateEntryFormProps {
   trackedMetrics: MetricTracking[];
@@ -90,7 +90,10 @@ export default function EntryCreationForm({
         values: entryValues,
         recorded_at: recordedAt,
       });
-      router.push("/protected?success=true");
+      router.push("/protected");
+      toast("Success!", {
+        icon: <CheckmarkIcon />
+      })
     } catch (error) {
       console.error(error);
       toast.error("Failed to create entry. Please try again.");
@@ -158,6 +161,7 @@ export default function EntryCreationForm({
 
       <div className="flex gap-4 pt-4">
         <Button
+          aria-label="save-entry"
           onClick={handleSubmit}
           disabled={!isFormValid}
           className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-primary disabled:bg-gray-400 disabled:cursor-not-allowed font-semibold py-4 px-6 rounded-lg flex items-center justify-center gap-2 transition-colors"
@@ -166,7 +170,7 @@ export default function EntryCreationForm({
           Save Entry
         </Button>
         <Button onClick={handleCancel} className="">
-          <X className="w-5 h-5" aria-label="submit-entry" />
+          <X className="w-5 h-5" aria-label="cancel" />
           Cancel
         </Button>
       </div>

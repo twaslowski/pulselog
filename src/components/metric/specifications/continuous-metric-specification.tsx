@@ -41,6 +41,7 @@ export default function ContinuousMetricSpecification({
           <Label htmlFor="minValue">Minimum Value</Label>
           <Input
             id="minValue"
+            aria-label="set-min-value"
             type="number"
             placeholder="e.g., 0"
             value={minValue ?? ""}
@@ -54,6 +55,7 @@ export default function ContinuousMetricSpecification({
           <Label htmlFor="maxValue">Maximum Value</Label>
           <Input
             id="maxValue"
+            aria-label="set-max-value"
             type="number"
             placeholder="e.g., 24"
             value={maxValue ?? ""}
@@ -67,7 +69,11 @@ export default function ContinuousMetricSpecification({
         <Button onClick={onBack} variant="outline">
           Back
         </Button>
-        <Button aria-label="create-metric" onClick={handleSubmit} disabled={!canProceed || isSubmitting}>
+        <Button
+          aria-label="submit-metric"
+          onClick={handleSubmit}
+          disabled={!canProceed || isSubmitting}
+        >
           {isSubmitting ? "Creating..." : "Create Metric"}
         </Button>
       </div>

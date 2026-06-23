@@ -40,10 +40,14 @@ export default defineConfig({
     },
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: `e2e/.auth/user.json`,
+      },
       testIgnore: /auth\.setup\.ts/,
       testDir: "./e2e/tests",
       dependencies: ["setup"],
+      grep: new RegExp(".*")
     },
     {
       name: "firefox",

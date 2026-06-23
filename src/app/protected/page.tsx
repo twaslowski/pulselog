@@ -45,6 +45,7 @@ export default async function LandingPage({
         <ActionCard
           href="/protected/new-entry"
           title="Create New Entry"
+          aria-label="create-new-record"
           description="Log your mood, sleep, and other metrics"
           icon={Plus}
           iconSize="lg"
@@ -56,6 +57,7 @@ export default async function LandingPage({
           <ActionCard
             href="/protected/metrics"
             title="Manage Metrics"
+            aria-label="manage-metrics"
             description="Create and configure the metrics you want to track"
             icon={Settings}
           />

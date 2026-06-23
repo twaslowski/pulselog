@@ -1,3 +1,5 @@
+import { test } from "@playwright/test";
+
 test.describe(`Sign-up`, () => {
   // Use the language-specific authentication
   test.use({

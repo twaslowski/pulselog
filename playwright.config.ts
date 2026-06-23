@@ -35,19 +35,29 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: "setup",
+      testMatch: /auth.setup\.ts/,
+    },
+    {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+      testIgnore: /auth\.setup\.ts/,
+      testDir: "./e2e/tests",
+      dependencies: ["setup"],
     },
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"] },
+      testIgnore: /auth\.setup\.ts/,
+      testDir: "./e2e/tests",
+      dependencies: ["setup"],
     },
   ],
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "pnpm dev --port 3030",
-    url: "http://localhost:3030",
+    command: "pnpm dev --port 3000",
+    url: "http://localhost:3000",
     reuseExistingServer: !process.env.CI,
   },
 });

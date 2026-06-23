@@ -53,6 +53,6 @@ next-env.d.ts
 .venv
 
 # playwright
-.e2e/.auth
+e2e/.auth/
 playwright-report
 test-results

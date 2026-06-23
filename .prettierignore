@@ -5,3 +5,7 @@ public/
 terraform/
 
 src/db/
+
+*.yaml
+*.js
+*.json

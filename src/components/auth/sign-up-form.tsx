@@ -1,6 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { OneTapAuth } from "@/components/auth/one-tap";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,10 +15,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { signUpWithEmail } from "@/app/actions/auth";
+import { createClient } from "@/lib/supabase/client";
+import { cn } from "@/lib/utils";
 
 export function SignUpForm({
   className,
@@ -29,6 +31,7 @@ export function SignUpForm({
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    const supabase = createClient();
     setIsLoading(true);
     setError(null);
 
@@ -39,14 +42,17 @@ export function SignUpForm({
     }
 
     try {
-      await signUpWithEmail(email, password);
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/protected`,
+        },
+      });
+      if (error) throw error;
       router.push("/protected");
     } catch (error: unknown) {
-      setError(
-        error instanceof Error
-          ? "Error: " + error.message
-          : "An error occurred",
-      );
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -97,13 +103,15 @@ export function SignUpForm({
                   onChange={(e) => setRepeatPassword(e.target.value)}
                 />
               </div>
-
               {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button
+                type="submit"
+                className="w-full"
+                aria-label="sign-up"
+                disabled={isLoading}
+              >
                 {isLoading ? "Creating an account..." : "Sign up"}
               </Button>
-
-              <div className="border border-primary-foreground" />
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
@@ -112,6 +120,8 @@ export function SignUpForm({
               </Link>
             </div>
           </form>
+          <div className="border border-foreground/20 my-4" />
+          <OneTapAuth />
         </CardContent>
       </Card>
     </div>

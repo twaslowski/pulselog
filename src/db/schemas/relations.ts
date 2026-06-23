@@ -19,15 +19,6 @@ export const relations = defineRelations(schema, (r) => ({
       to: r.metric.id,
     }),
   },
-  telegramAccounts: {
-    usersInAuth: r.one.usersInAuth({
-      from: r.telegramAccounts.userId,
-      to: r.usersInAuth.id,
-    }),
-  },
-  usersInAuth: {
-    telegramAccounts: r.many.telegramAccounts(),
-  },
   trackingDefault: {
     metric: r.one.metric({
       from: r.trackingDefault.metricId,

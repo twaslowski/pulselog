@@ -1,6 +1,7 @@
 import {
   bigint,
   boolean,
+  foreignKey,
   index,
   jsonb,
   numeric,
@@ -15,6 +16,28 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
+import { authUsers } from "drizzle-orm/supabase";
+
+export const profile = pgTable.withRLS(
+  "profile",
+  {
+    id: uuid().primaryKey(),
+    createdAt: timestamp("created_at").defaultNow(),
+  },
+  (table) => [
+    foreignKey({
+      columns: [table.id],
+      foreignColumns: [authUsers.id],
+      name: "profiles_id_fkey",
+    }).onDelete("cascade"),
+    pgPolicy("owned entity access", {
+      as: "permissive",
+      for: "all",
+      to: ["public"],
+      using: sql`(( SELECT auth.uid() AS uid) = id)`,
+    }),
+  ],
+);
 
 export const entry = pgTable.withRLS(
   "entry",
@@ -141,31 +164,6 @@ export const metricTracking = pgTable.withRLS(
   ],
 );
 
-export const telegramAccounts = pgTable.withRLS(
-  "telegram_accounts",
-  {
-    telegramId: bigint("telegram_id", { mode: "number" }).primaryKey(),
-    userId: uuid("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    telegramUsername: text("telegram_username"),
-    linkedAt: timestamp("linked_at", { withTimezone: true }).default(
-      sql`now()`,
-    ),
-    lastLoginAt: timestamp("last_login_at", { withTimezone: true }),
-  },
-  (table) => [
-    index("idx_telegram_accounts_user_id").using(
-      "btree",
-      table.userId.asc().nullsLast(),
-    ),
-    unique("telegram_accounts_user_id_key").on(table.userId),
-    pgPolicy("own_telegram_account", {
-      using: sql`(( SELECT auth.uid() AS uid) = user_id)`,
-    }),
-  ],
-);
-
 export const trackingDefault = pgTable.withRLS(
   "tracking_default",
   {
@@ -180,30 +178,5 @@ export const trackingDefault = pgTable.withRLS(
       to: ["anon", "authenticated"],
       using: sql`true`,
     }),
-  ],
-);
-
-export const verificationCodes = pgTable.withRLS(
-  "verification_codes",
-  {
-    id: uuid().defaultRandom().primaryKey(),
-    telegramId: bigint("telegram_id", { mode: "number" }).notNull(),
-    code: text().notNull(),
-    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
-    used: boolean().default(false),
-    createdAt: timestamp("created_at", { withTimezone: true }).default(
-      sql`now()`,
-    ),
-    telegramUsername: text("telegram_username"),
-  },
-  (table) => [
-    index("idx_verification_codes_expires_at").using(
-      "btree",
-      table.expiresAt.asc().nullsLast(),
-    ),
-    index("idx_verification_codes_telegram_id").using(
-      "btree",
-      table.telegramId.asc().nullsLast(),
-    ),
   ],
 );

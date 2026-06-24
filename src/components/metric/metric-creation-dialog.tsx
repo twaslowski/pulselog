@@ -87,7 +87,7 @@ export default function MetricCreationDialog({
   const [formData, setFormData] = useState<MetricFormData>({
     name: metric?.name ?? "",
     description: metric?.description ?? "",
-    metricType: metric?.metricType ?? undefined,
+    metricType: metric?.metricType ?? null,
     labels: metric?.labels ?? {},
     minValue: metric?.minValue ?? null,
     maxValue: metric?.maxValue ?? null,

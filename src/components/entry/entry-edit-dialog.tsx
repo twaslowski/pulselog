@@ -27,7 +27,7 @@ export default function EntryEditDialog({
   onClose,
   onComplete,
 }: EntryEditDialogProps) {
-  const [recordedAt, setRecordedAt] = useState(new Date(entry.recorded_at));
+  const [recordedAt, setRecordedAt] = useState(new Date(entry.recordedAt));
 
   const initialValues: Record<string, number> = {};
   entry.values.forEach((value) => {
@@ -110,7 +110,7 @@ export default function EntryEditDialog({
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Date/Time Input */}
-            <DatePicker onChange={setRecordedAt} initial={entry.recorded_at} />
+            <DatePicker onChange={setRecordedAt} initial={entry.recordedAt} />
 
             <div className="border border-primary/70" />
 

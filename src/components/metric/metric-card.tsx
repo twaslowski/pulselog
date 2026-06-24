@@ -99,14 +99,14 @@ const MetricCard: React.FC<MetricCardProps> = ({
               <DropdownMenuContent align="end">
                 <DropdownMenuItem
                   onClick={() => openEditDialog(metric)}
-                  disabled={metric.owner_id.toUpperCase() === "SYSTEM"}
+                  disabled={metric.ownerId.toUpperCase() === "SYSTEM"}
                 >
                   <Edit3Icon />
                   Edit Metric
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => onDeleteMetric(metric.id)}
-                  disabled={metric.owner_id.toUpperCase() === "SYSTEM"}
+                  disabled={metric.ownerId.toUpperCase() === "SYSTEM"}
                 >
                   <TrashIcon color="red" />
                   Delete Metric

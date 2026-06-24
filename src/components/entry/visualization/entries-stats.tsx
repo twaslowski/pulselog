@@ -74,13 +74,13 @@ export default function EntriesStats({ entries, trackingData }: StatsProps) {
     sevenDaysAgo.setDate(now.getDate() - 7);
 
     const entriesLast7Days = entries.filter(
-      (entry) => new Date(entry.recorded_at) >= sevenDaysAgo,
+      (entry) => new Date(entry.recordedAt) >= sevenDaysAgo,
     ).length;
 
     const oldestEntry =
       entries.length > 0
         ? new Date(
-            Math.min(...entries.map((e) => new Date(e.recorded_at).getTime())),
+            Math.min(...entries.map((e) => new Date(e.recordedAt).getTime())),
           )
         : null;
 
@@ -120,7 +120,7 @@ export default function EntriesStats({ entries, trackingData }: StatsProps) {
     >();
 
     entries.forEach((entry) => {
-      const entryDate = new Date(entry.recorded_at);
+      const entryDate = new Date(entry.recordedAt);
       entry.values.forEach((value) => {
         if (!metricMap.has(value.metric.id)) {
           metricMap.set(value.metric.id, {
@@ -195,7 +195,7 @@ export default function EntriesStats({ entries, trackingData }: StatsProps) {
     // Group values by entry date to ensure proper pairing
     const entriesByDate = new Map<string, Map<string, number>>();
     entries.forEach((entry) => {
-      const dateKey = entry.recorded_at.toISOString();
+      const dateKey = entry.recordedAt.toISOString();
       const metricsInEntry = new Map<string, number>();
       entry.values.forEach((value) => {
         metricsInEntry.set(value.metric.id, value.value);

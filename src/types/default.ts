@@ -1,8 +1,7 @@
 import { z } from "zod";
+import { trackingDefault } from "@/db/schemas/schema";
+import { createSelectSchema } from "drizzle-zod";
 
-export const DefaultSchema = z.object({
-  metric_id: z.string(),
-  baseline: z.number(),
-});
+export const TrackingDefaultSchema = createSelectSchema(trackingDefault);
 
-export type Default = z.infer<typeof DefaultSchema>;
+export type Default = z.infer<typeof TrackingDefaultSchema>;

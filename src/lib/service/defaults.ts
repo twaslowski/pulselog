@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { Default, DefaultSchema } from "@/types/default";
+import { Default, TrackingDefaultSchema } from "@/types/default";
 import { z } from "zod";
 
 export const getTrackingDefaults = async (): Promise<Default[]> => {
@@ -10,5 +10,5 @@ export const getTrackingDefaults = async (): Promise<Default[]> => {
     throw new Error(`Error fetching system metrics: ${error.message}`);
   }
 
-  return z.array(DefaultSchema).parse(data);
+  return z.array(TrackingDefaultSchema).parse(data);
 };

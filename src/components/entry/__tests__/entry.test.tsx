@@ -2,14 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 import { Entry } from "../visualization/entry";
 import { mood, sleep } from "@/__fixtures__/metric";
 import { EntryValueWithMetric } from "@/types/entry-value";
-
-const entry = {
-  id: 123,
-  user_id: "user_1",
-  recorded_at: "2024-06-01T12:00:00Z",
-  creation_timestamp: "2024-06-01T12:00:00Z",
-  updated_timestamp: "2024-06-01T12:00:00Z",
-};
+import { entry } from "@/__fixtures__";
 
 jest.mock("@/lib/supabase/server", () => ({
   createClient: jest.fn(),
@@ -21,7 +14,7 @@ describe("entry visualization", () => {
       ...entry,
       values: [],
     };
-    render(<Entry entry={entryWithoutValues} />);
+    render(<Entry entry={entryWithoutValues} onEdit={() => {}} onDelete={() => {}} />);
 
     const noRecords = screen.getByText("No values recorded");
     expect(noRecords).toBeInTheDocument();
@@ -29,15 +22,17 @@ describe("entry visualization", () => {
 
   it("should render entries with labels", () => {
     const values: EntryValueWithMetric[] = [
-      { metric_id: mood.id, value: 0, metric: mood },
-      { metric_id: sleep.id, value: 7, metric: sleep },
+      { metricId: mood.id, value: 0, metric: mood },
+      { metricId: sleep.id, value: 7, metric: sleep },
     ];
     const entryWithValues = {
       ...entry,
       values,
     };
 
-    render(<Entry entry={entryWithValues} />);
+    render(
+      <Entry entry={entryWithValues} onEdit={() => {}} onDelete={() => {}} />,
+    );
 
     const moodBadge = screen.getByLabelText(
       `entry-${entry.id}-value-${mood.name}`,

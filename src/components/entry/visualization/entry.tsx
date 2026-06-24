@@ -27,7 +27,7 @@ export function Entry({ entry, onEdit, onDelete }: EntryProps) {
 
   // Given the numeric value, possibly derive the corresponding label for discrete metrics
   const deriveMetricValue = (value: number, metric: Metric): string => {
-    if (metric.metric_type === "continuous") {
+    if (metric.metricType === "continuous") {
       return value.toString();
     }
 
@@ -41,7 +41,7 @@ export function Entry({ entry, onEdit, onDelete }: EntryProps) {
     <Card>
       <CardHeader className="pb-4">
         <div className="flex flex-row justify-between gap-x-4 items-center">
-          <CardTitle>{formatDateTime(entry.recorded_at)}</CardTitle>
+          <CardTitle>{formatDateTime(entry.recordedAt)}</CardTitle>
           <div className="flex flex-row">
             <Button
               variant="ghost"

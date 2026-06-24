@@ -72,7 +72,7 @@ export default function EntriesPieChart({
 
     // Filter entries within the date range
     const filteredEntries = entries.filter(
-      (entry) => entry.recorded_at >= startDate && entry.recorded_at <= endDate,
+      (entry) => entry.recordedAt >= startDate && entry.recordedAt <= endDate,
     );
 
     // Count occurrences of each value

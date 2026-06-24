@@ -45,7 +45,7 @@ export const configureDefaultTracking = async (userId: string) => {
   for (const d of defaults) {
     const { error } = await supabase.from("metric_tracking").insert({
       user_id: userId,
-      metric_id: d.metric_id,
+      metric_id: d.metricId,
       baseline: d.baseline,
       tracked_at: new Date().toISOString(),
     });

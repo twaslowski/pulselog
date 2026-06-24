@@ -1,2 +1,0 @@
-ALTER TABLE entry
-    ADD COLUMN IF NOT EXISTS comment TEXT;

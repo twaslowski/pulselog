@@ -1,6 +1,5 @@
 -- Current sql file was generated after introspecting the database
 -- If you want to run this migration please uncomment this code before executing migrations
-/*
 CREATE TABLE "entry" (
 	"id" serial PRIMARY KEY,
 	"user_id" varchar(255),
@@ -92,4 +91,3 @@ CREATE POLICY "select_system_metrics" ON "metric" AS PERMISSIVE FOR SELECT TO pu
 CREATE POLICY "own_metric_tracking" ON "metric_tracking" AS PERMISSIVE FOR ALL TO "authenticated" USING ((((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text))) WITH CHECK ((((( SELECT auth.uid() AS uid))::character varying IS NOT NULL) AND (((( SELECT auth.uid() AS uid))::character varying)::text = (user_id)::text)));
 CREATE POLICY "own_telegram_account" ON "telegram_accounts" AS PERMISSIVE FOR ALL TO public USING ((( SELECT auth.uid() AS uid) = user_id));
 CREATE POLICY "select_tracking_defaults" ON "tracking_default" AS PERMISSIVE FOR SELECT TO "anon", "authenticated" USING (true);
-*/

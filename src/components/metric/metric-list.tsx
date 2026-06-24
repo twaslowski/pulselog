@@ -40,7 +40,7 @@ export default function MetricList({
         tracked.push(metric);
       }
 
-      if (metric.owner_id === "SYSTEM") {
+      if (metric.ownerId === "SYSTEM") {
         system.push(metric);
       } else {
         user.push(metric);
@@ -59,7 +59,7 @@ export default function MetricList({
       // Create optimistic tracking entry
       newTracking.set(metric.id, {
         userId: "",
-        trackedAt: new Date().toISOString(),
+        trackedAt: new Date(),
         baseline: 0,
         metric: metric,
       });

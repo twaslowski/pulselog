@@ -2,9 +2,12 @@ import { z } from "zod";
 import { metric } from "@/db/schemas/schema";
 import { createSelectSchema } from "drizzle-zod";
 
-const MetricType = z.enum(["discrete", "continuous", "event"]);
+const MetricTypeSchema = z.enum(["discrete", "continuous", "event"]);
 
-export const MetricSchema = createSelectSchema(metric);
+export const MetricSchema = createSelectSchema(metric)
+  .extend({
+    metricType: MetricTypeSchema,
+  });
 
 export const deriveHumanReadableMetricType = (metricType: MetricType) => {
   switch (metricType) {
@@ -17,5 +20,5 @@ export const deriveHumanReadableMetricType = (metricType: MetricType) => {
   }
 };
 
-export type MetricType = z.infer<typeof MetricType>;
+export type MetricType = z.infer<typeof MetricTypeSchema>;
 export type Metric = z.infer<typeof MetricSchema>;

@@ -93,7 +93,7 @@ export const metric = pgTable.withRLS(
     id: uuid().defaultRandom().primaryKey(),
     name: varchar({ length: 255 }).notNull(),
     description: text().notNull(),
-    labels: jsonb(),
+    labels: jsonb().notNull().$type<Record<string, number>>(),
     ownerId: varchar("owner_id", { length: 36 }).default("SYSTEM").notNull(),
     creationTimestamp: timestamp("creation_timestamp", { withTimezone: true })
       .default(sql`now()`)

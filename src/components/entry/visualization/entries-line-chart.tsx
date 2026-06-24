@@ -62,13 +62,13 @@ export default function EntriesLineChart({
   const chartData = useMemo(() => {
     // Filter entries within the date range
     const filteredEntries = entries.filter(
-      (entry) => entry.recorded_at >= startDate && entry.recorded_at <= endDate,
+      (entry) => entry.recordedAt >= startDate && entry.recordedAt <= endDate,
     );
 
     // Group by day and metric, collecting all values per day
     const dailyData = new Map<string, Map<string, number[]>>();
     filteredEntries.forEach((entry) => {
-      const dateKey = format(entry.recorded_at, "yyyy-MM-dd");
+      const dateKey = format(entry.recordedAt, "yyyy-MM-dd");
       if (!dailyData.has(dateKey)) {
         dailyData.set(dateKey, new Map());
       }

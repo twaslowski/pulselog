@@ -36,12 +36,12 @@ export const MetricLabels: React.FC<MetricLabelProps> = ({ metric }) => {
     <>
       <Badge
         variant="outline"
-        className={getMetricTypeClass(metric.metric_type)}
+        className={getMetricTypeClass(metric.metricType)}
       >
-        {deriveHumanReadableMetricType(metric.metric_type)}
+        {deriveHumanReadableMetricType(metric.metricType)}
       </Badge>
-      <Badge variant="outline" className={getOwnerClass(metric.owner_id)}>
-        {getOwnerLabel(metric.owner_id)}
+      <Badge variant="outline" className={getOwnerClass(metric.ownerId)}>
+        {getOwnerLabel(metric.ownerId)}
       </Badge>
     </>
   );

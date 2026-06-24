@@ -4,7 +4,7 @@
  */
 
 import { Entry } from "@/types/entry";
-import { EntryValue } from "@/types/entry-value";
+import { EntryValue, EntryValueWithMetric } from "@/types/entry-value";
 import { Metric } from "@/types/metric";
 import { MetricTracking } from "@/types/tracking";
 import { endOfMonth, format, startOfMonth } from "date-fns";
@@ -20,7 +20,7 @@ import { endOfMonth, format, startOfMonth } from "date-fns";
  */
 export function extractAvailableYears(entries: Entry[]): string[] {
   const years = new Set(
-    entries.map((e) => e.recorded_at.getFullYear().toString()),
+    entries.map((e) => e.recordedAt.getFullYear().toString()),
   );
   return Array.from(years).sort();
 }
@@ -32,7 +32,7 @@ export function extractAvailableYears(entries: Entry[]): string[] {
  */
 export function extractAvailableMonths(entries: Entry[]): string[] {
   const months = new Set(
-    entries.map((e) => format(new Date(e.recorded_at), "yyyy-MM")),
+    entries.map((e) => format(new Date(e.recordedAt), "yyyy-MM")),
   );
   return Array.from(months).sort();
 }
@@ -118,6 +118,7 @@ export function buildMetricConfigs(
  * @param metricId - ID of the metric to filter by
  * @returns Map of date key (YYYY-M-D) to array of EntryValues
  */
+// todo: fix this function, and the whole of this class for that matter.
 export function groupValuesByDate(
   entries: Entry[],
   metricId: string,
@@ -126,9 +127,12 @@ export function groupValuesByDate(
   entries.forEach((entry) => {
     entry.values.forEach((value) => {
       if (value.metric.id === metricId) {
-        const dateKey = `${entry.recorded_at.getFullYear()}-${entry.recorded_at.getMonth()}-${entry.recorded_at.getDate()}`;
+        const dateKey = `${entry.recordedAt.getFullYear()}-${entry.recordedAt.getMonth()}-${entry.recordedAt.getDate()}`;
         const existing = valuesMap.get(dateKey) || [];
-        valuesMap.set(dateKey, [...existing, value]);
+        valuesMap.set(dateKey, [
+          ...existing,
+          // value
+        ]);
       }
     });
   });
@@ -163,9 +167,9 @@ export function prepareMonthlyChartData(
   // Group by day and metric, collecting all values per day
   const dailyData = new Map<string, Map<string, number[]>>();
   entries.forEach((entry) => {
-    if (entry.recorded_at < monthStart || entry.recorded_at > monthEnd) return;
+    if (entry.recordedAt < monthStart || entry.recordedAt > monthEnd) return;
 
-    const dateKey = format(entry.recorded_at, "yyyy-MM-dd");
+    const dateKey = format(entry.recordedAt, "yyyy-MM-dd");
     if (!dailyData.has(dateKey)) {
       dailyData.set(dateKey, new Map());
     }

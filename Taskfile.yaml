@@ -9,8 +9,6 @@ tasks:
     desc: Start supabase
     cmds:
       - supabase stop
-      - pkill ngrok || true
-      - pkill functions || true
 
   run:
     desc: Run the development server

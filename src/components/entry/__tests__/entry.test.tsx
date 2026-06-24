@@ -14,7 +14,13 @@ describe("entry visualization", () => {
       ...entry,
       values: [],
     };
-    render(<Entry entry={entryWithoutValues} onEdit={() => {}} onDelete={() => {}} />);
+    render(
+      <Entry
+        entry={entryWithoutValues}
+        onEdit={() => {}}
+        onDelete={() => {}}
+      />,
+    );
 
     const noRecords = screen.getByText("No values recorded");
     expect(noRecords).toBeInTheDocument();

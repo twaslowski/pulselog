@@ -1,15 +1,34 @@
+"use client";
+
+import useSWR from "swr";
+
 import React from "react";
-import { getAllMetrics, getTrackedMetrics } from "@/lib/service/metric";
 import MetricList from "@/components/metric/metric-list";
 import { BackNav } from "@/components/back-nav";
 import MetricCreationButton from "@/components/metric/metric-creation-button";
 import { MetricDialogProvider } from "@/components/metric/metric-dialog-provider";
 
-export default async function SettingsPage() {
-  const [allMetrics, trackedMetrics] = await Promise.all([
-    getAllMetrics(),
-    getTrackedMetrics(),
-  ]);
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+export default function SettingsPage() {
+  const {
+    data: metrics,
+    error: metricsError,
+    isLoading: metricsLoading,
+  } = useSWR("/api/v1/metric", fetcher);
+  const {
+    data: metricTracking,
+    error: metricTrackingError,
+    isLoading: metricTrackingLoading,
+  } = useSWR("/api/v1/tracking", fetcher);
+
+  if (metricsLoading || metricTrackingLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (metricsError || metricTrackingError) {
+    return <div>Error loading metrics</div>;
+  }
 
   return (
     <MetricDialogProvider>
@@ -28,7 +47,7 @@ export default async function SettingsPage() {
             </p>
           </div>
 
-          <MetricList metrics={allMetrics} metricTracking={trackedMetrics} />
+          <MetricList metrics={metrics} metricTracking={metricTracking} />
         </div>
       </div>
     </MetricDialogProvider>

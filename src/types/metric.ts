@@ -4,10 +4,9 @@ import { createSelectSchema } from "drizzle-zod";
 
 const MetricTypeSchema = z.enum(["discrete", "continuous", "event"]);
 
-export const MetricSchema = createSelectSchema(metric)
-  .extend({
-    metricType: MetricTypeSchema,
-  });
+export const MetricSchema = createSelectSchema(metric).extend({
+  metricType: MetricTypeSchema,
+});
 
 export const deriveHumanReadableMetricType = (metricType: MetricType) => {
   switch (metricType) {

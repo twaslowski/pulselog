@@ -8,5 +8,5 @@ export const entry: Entry = {
   recordedAt: new Date(),
   creationTimestamp: new Date(),
   updatedTimestamp: new Date(),
-  values: []
+  values: [],
 };

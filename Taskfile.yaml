@@ -2,8 +2,12 @@ version: "3"
 tasks:
   start-env:
     desc: Start supabase
+    dotenv:
+      - .env.local
     cmds:
       - supabase start
+      - pnpm drizzle-kit migrate
+      - psql $DATABASE_URL --file ./supabase/seed.sql
 
   stop-env:
     desc: Start supabase

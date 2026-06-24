@@ -5,7 +5,7 @@ import { db } from "@/db/connect";
 export const GET = withApiHandler({}, async ({ profile }) => {
   const trackedMetrics = await db.query.metricTracking.findMany({
     columns: { userId: true, trackedAt: true, baseline: true },
-    where: { OR: [{ userId: profile.id }, { userId: "SYSTEM" }] },
+    where: { userId: profile.id },
     with: { metric: true },
   });
 

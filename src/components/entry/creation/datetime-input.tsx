@@ -21,7 +21,7 @@ interface DatePickerInputProps {
 
 export function DatePicker({ onChange, initial }: DatePickerInputProps) {
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState<Date | undefined>(initial ?? new Date());
+  const [date, setDate] = useState<Date>(initial ?? new Date());
 
   return (
     <FieldGroup className="mx-auto max-w-xs flex-row">
@@ -45,9 +45,8 @@ export function DatePicker({ onChange, initial }: DatePickerInputProps) {
               captionLayout="dropdown"
               defaultMonth={date}
               onSelect={(date) => {
-                setDate(date);
-                // todo: potentially risky.
-                onChange(date!);
+                setDate(date ?? new Date());
+                onChange(date ?? new Date());
                 setOpen(false);
               }}
             />
@@ -60,7 +59,7 @@ export function DatePicker({ onChange, initial }: DatePickerInputProps) {
           type="time"
           id="time-picker-optional"
           step="1"
-          defaultValue={`${date?.getHours()}:${date?.getMinutes()}:${date?.getSeconds()}`}
+          defaultValue={`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`}
           className="appearance-none bg-background [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
         />
       </Field>

@@ -1,5 +1,5 @@
 import { MetricTracking } from "@/types/tracking";
-import { mood, sleep, exercise, waterIntake } from "./metric";
+import { mood, sleep, exercise } from "./metric";
 
 export const moodTracking: MetricTracking = {
   userId: "user-123",

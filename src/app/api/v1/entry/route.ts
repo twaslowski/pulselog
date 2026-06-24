@@ -4,7 +4,15 @@ import { NextResponse } from "next/server";
 import { db } from "@/db/connect";
 import { entry, entryValue } from "@/db/schemas/schema";
 import { takeUniqueOrThrow } from "@/db/util";
-import { eq } from "drizzle-orm";
+
+export const GET = withApiHandler({}, async ({ profile }) => {
+  const entries = await db.query.entry.findMany({
+    where: { userId: profile.id },
+    with: { values: true },
+  });
+
+  return NextResponse.json(entries, { status: 200 });
+});
 
 export const POST = withApiHandler(
   {
@@ -39,12 +47,3 @@ export const POST = withApiHandler(
     );
   },
 );
-
-export const GET = withApiHandler({}, async ({ profile }) => {
-  const entries = await db.query.entry.findMany({
-    where: { userId: profile.id },
-    with: { values: true },
-  });
-
-  return NextResponse.json(entries, { status: 200 });
-});

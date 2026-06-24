@@ -91,9 +91,11 @@ export default function InsightsPage() {
                   Start logging your moods and metrics to see insights here!
                 </p>
                 <p>
-                  <a>
-                    Create your first entry: href="/protected/new-entry"
-                    className="text-blue-500 underline" New Entry
+                  <a
+                    href="/protected/new-entry"
+                    className="text-blue-500 underline"
+                  >
+                    Create your first entry New Entry
                   </a>
                 </p>
               </CardDescription>

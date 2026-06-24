@@ -4,7 +4,7 @@
  */
 
 import { Entry } from "@/types/entry";
-import { EntryValue, EntryValueWithMetric } from "@/types/entry-value";
+import { EntryValue } from "@/types/entry-value";
 import { Metric } from "@/types/metric";
 import { MetricTracking } from "@/types/tracking";
 import { endOfMonth, format, startOfMonth } from "date-fns";

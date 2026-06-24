@@ -7,27 +7,39 @@ import MetricList from "@/components/metric/metric-list";
 import { BackNav } from "@/components/back-nav";
 import MetricCreationButton from "@/components/metric/metric-creation-button";
 import { MetricDialogProvider } from "@/components/metric/metric-dialog-provider";
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import { fetcher } from "@/lib/fetcher";
+import { Metric } from "@/types/metric";
+import { MetricTracking } from "@/types/tracking";
+import { ErrorCard } from "@/components/error";
+import LoadingAnimation from "@/components/loading";
 
 export default function SettingsPage() {
   const {
     data: metrics,
     error: metricsError,
     isLoading: metricsLoading,
-  } = useSWR("/api/v1/metric", fetcher);
+  } = useSWR<Metric[]>("/api/v1/metric", fetcher);
   const {
     data: metricTracking,
     error: metricTrackingError,
     isLoading: metricTrackingLoading,
-  } = useSWR("/api/v1/tracking", fetcher);
+  } = useSWR<MetricTracking[]>("/api/v1/tracking", fetcher);
 
   if (metricsLoading || metricTrackingLoading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
 
   if (metricsError || metricTrackingError) {
-    return <div>Error loading metrics</div>;
+    return (
+      <ErrorCard
+        title="Error"
+        message="An error occurred when loading metrics."
+      />
+    );
+  }
+
+  if (!metrics || !metricTracking) {
+    return null;
   }
 
   return (

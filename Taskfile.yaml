@@ -5,7 +5,7 @@ tasks:
     dotenv:
       - .env.local
     cmds:
-      - supabase start
+      - pnpm supabase start
       - pnpm drizzle-kit migrate
       - psql $DATABASE_URL --file ./supabase/seed.sql
 

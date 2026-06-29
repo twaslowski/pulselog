@@ -6,7 +6,6 @@ import { eq, or } from "drizzle-orm";
 import { MetricCreationSchema } from "@/types/metric";
 import { extractBounds } from "@/lib/metric";
 
-
 export const GET = withApiHandler({}, async ({ profile }) => {
   const metrics = await db
     .select()
@@ -21,14 +20,7 @@ export const POST = withApiHandler(
     bodySchema: MetricCreationSchema,
   },
   async ({ profile, body }) => {
-    const {
-      name,
-      description,
-      metricType,
-      labels,
-      minValue,
-      maxValue,
-    } = body;
+    const { name, description, metricType, labels, minValue, maxValue } = body;
 
     const bounds = extractBounds({
       labels,

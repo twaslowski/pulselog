@@ -11,7 +11,6 @@ const MetricIdParamSchema = z.object({
   id: z.uuid(),
 });
 
-
 export const PUT = withApiHandler(
   {
     paramsSchema: MetricIdParamSchema,

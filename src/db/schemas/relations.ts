@@ -12,13 +12,6 @@ export const relations = defineRelations(schema, (r) => ({
       to: r.entryValue.entryId,
     }),
   },
-  // For documentational purposes only: This relation is not used or required in the codebase.
-  // profile: {
-  //   usersInAuth: r.one.usersInAuth({
-  //     from: r.profile.id,
-  //     to: authUsers.id,
-  //   }),
-  // },
   metric: {
     entries: r.many.entry(),
     metricTrackings: r.many.metricTracking(),
@@ -33,6 +26,16 @@ export const relations = defineRelations(schema, (r) => ({
   trackingDefault: {
     metric: r.one.metric({
       from: r.trackingDefault.metricId,
+      to: r.metric.id,
+    }),
+  },
+  entryValue: {
+    entry: r.one.entry({
+      from: r.entryValue.entryId,
+      to: r.entry.id,
+    }),
+    metric: r.one.metric({
+      from: r.entryValue.metricId,
       to: r.metric.id,
     }),
   },

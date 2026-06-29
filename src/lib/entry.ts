@@ -36,3 +36,31 @@ export async function getEntries(): Promise<Entry[]> {
 
   return data;
 }
+
+export async function deleteEntry(id: number): Promise<void> {
+  const response = await fetch(`/api/v1/entry/${id}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || "Failed to delete entry");
+  }
+}
+
+export async function updateEntry(
+  entryId: number,
+  updateEntryInput: CreateEntryInput,
+): Promise<void> {
+  const response = await fetch(`/api/v1/entry/${entryId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updateEntryInput),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || "Failed to update entry");
+  }
+}

@@ -29,7 +29,10 @@ export const DELETE = withApiHandler(
       .returning({ metricId: metricTracking.metricId });
 
     if (deleted.length === 0) {
-      return NextResponse.json({ error: "Metric tracking not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Metric tracking not found" },
+        { status: 404 },
+      );
     }
 
     return new NextResponse(null, { status: 204 });
@@ -54,7 +57,10 @@ export const PATCH = withApiHandler(
       .returning();
 
     if (updated.length === 0) {
-      return NextResponse.json({ error: "Metric tracking not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Metric tracking not found" },
+        { status: 404 },
+      );
     }
 
     return NextResponse.json(updated[0], { status: 200 });

@@ -108,7 +108,9 @@ const MetricCard: React.FC<MetricCardProps> = ({
                   Edit Metric
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                  onClick={() => onDeleteMetric(metric.id, () => router.refresh())}
+                  onClick={() =>
+                    onDeleteMetric(metric.id, () => router.refresh())
+                  }
                   disabled={metric.ownerId.toUpperCase() === "SYSTEM"}
                 >
                   <TrashIcon color="red" />

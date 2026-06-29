@@ -27,7 +27,7 @@ export default function InsightsPage() {
           getEntries(),
           getTrackedMetrics(),
         ]);
-        console.log("Fetched entries:", fetchedEntries);
+
         setEntries(fetchedEntries);
         setTrackedMetrics(fetchedMetrics);
       } catch (err) {

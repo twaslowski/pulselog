@@ -10,8 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckIcon, Save, XIcon } from "lucide-react";
 import ValueSelect from "@/components/entry/value-select";
-import { updateEntry } from "@/app/actions/entry";
-import toast from "react-hot-toast";
+import { updateEntry } from "@/lib/entry";
+import toast, { CheckmarkIcon } from "react-hot-toast";
 import { extractErrorMessage } from "@/lib/utils";
 import { AdditionalMetricPicker } from "@/components/entry/creation/additional-metric-picker";
 import { DatePicker } from "@/components/entry/creation/datetime-input";
@@ -79,7 +79,7 @@ export default function EntryEditDialog({
         values: entryValues,
       });
       toast("Entry updated successfully", {
-        icon: <CheckIcon />,
+        icon: <CheckmarkIcon />,
       });
       onComplete?.();
       onClose();

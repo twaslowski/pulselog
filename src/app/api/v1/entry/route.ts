@@ -8,7 +8,7 @@ import { takeUniqueOrThrow } from "@/db/util";
 export const GET = withApiHandler({}, async ({ profile }) => {
   const entries = await db.query.entry.findMany({
     where: { userId: profile.id },
-    with: { values: true },
+    with: { values: { with: { metric: true } } },
   });
 
   return NextResponse.json(entries, { status: 200 });
@@ -31,13 +31,13 @@ export const POST = withApiHandler(
       .returning()
       .then((entry) => takeUniqueOrThrow(entry).id);
 
-    values.forEach((v) => {
-      db.insert(entryValue).values({
+    await db.insert(entryValue).values(
+      values.map((v) => ({
         entryId: entryId,
         metricId: v.metricId,
         value: v.value,
-      });
-    });
+      })),
+    );
 
     return NextResponse.json(
       {
@@ -47,5 +47,3 @@ export const POST = withApiHandler(
     );
   },
 );
-
-// todo: DELETE, PUT

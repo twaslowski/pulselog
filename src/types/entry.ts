@@ -7,6 +7,9 @@ const isoDateString = z.iso.datetime({ offset: true });
 
 export const EntrySelectSchema = createSelectSchema(entry);
 export const EntrySchema = EntrySelectSchema.extend({
+  recordedAt: z.coerce.date(),
+  updatedTimestamp: z.coerce.date(),
+  creationTimestamp: z.coerce.date(),
   values: z.array(EntryValueSchema),
 });
 

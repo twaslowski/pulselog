@@ -8,10 +8,18 @@ export function extractBounds(metricData: {
   const labelsMin = hasLabels ? Math.min(...labels) : null;
   const labelsMax = hasLabels ? Math.max(...labels) : null;
 
-  if (hasLabels && metricData.minValue !== null && labelsMin! < metricData.minValue) {
+  if (
+    hasLabels &&
+    metricData.minValue !== null &&
+    labelsMin! < metricData.minValue
+  ) {
     throw new Error("Labels contain values below the specified minValue");
   }
-  if (hasLabels && metricData.maxValue !== null && labelsMax! > metricData.maxValue) {
+  if (
+    hasLabels &&
+    metricData.maxValue !== null &&
+    labelsMax! > metricData.maxValue
+  ) {
     throw new Error("Labels contain values above the specified maxValue");
   }
 

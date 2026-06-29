@@ -2,12 +2,10 @@
 
 import { Entry as EntryType } from "@/types/entry";
 import { Entry } from "./entry";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { deleteEntry } from "@/app/actions/entry";
-import toast from "react-hot-toast";
-import { extractErrorMessage } from "@/lib/utils";
-import { CheckIcon } from "lucide-react";
+import { deleteEntry } from "@/lib/entry";
+import toast, { CheckmarkIcon } from "react-hot-toast";
 import EntryEditDialog from "@/components/entry/entry-edit-dialog";
 
 export default function EntriesList({ entries }: { entries: EntryType[] }) {
@@ -18,11 +16,11 @@ export default function EntriesList({ entries }: { entries: EntryType[] }) {
     try {
       await deleteEntry(entryId);
       toast("Entry deleted successfully", {
-        icon: <CheckIcon />,
+        icon: <CheckmarkIcon />,
       });
       router.refresh();
-    } catch (error: unknown) {
-      const message = extractErrorMessage(error);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown error";
       toast("Failed to delete entry: " + message, {
         style: { background: "red", color: "white" },
       });

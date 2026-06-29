@@ -8,6 +8,15 @@ export const MetricSchema = createSelectSchema(metric).extend({
   metricType: MetricTypeSchema,
 });
 
+export const MetricCreationSchema = MetricSchema.pick({
+  name: true,
+  description: true,
+  metricType: true,
+  labels: true,
+  minValue: true,
+  maxValue: true,
+});
+
 export const deriveHumanReadableMetricType = (metricType: MetricType) => {
   switch (metricType) {
     case "discrete":

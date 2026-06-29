@@ -27,6 +27,7 @@ import { extractErrorMessage } from "@/lib/utils";
 import toast from "react-hot-toast";
 import { useMetricDialog } from "@/components/metric/metric-dialog-provider";
 import { useIsMobile } from "@/hooks/use-is-mobile";
+import { useRouter } from "next/navigation";
 
 interface MetricCardProps {
   metric: Metric;
@@ -37,9 +38,10 @@ interface MetricCardProps {
   handleBaselineUpdate: (metricId: string, newBaseline: number) => void;
 }
 
-const onDeleteMetric = async (metricId: string) => {
+const onDeleteMetric = async (metricId: string, refresh: () => void) => {
   try {
     await deleteMetric(metricId);
+    refresh();
     toast("Metric deleted successfully", {
       icon: <CheckIcon />,
     });
@@ -61,6 +63,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
 }) => {
   const { openEditDialog } = useMetricDialog();
   const { isMobile } = useIsMobile();
+  const router = useRouter();
 
   return (
     <Card
@@ -105,7 +108,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
                   Edit Metric
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                  onClick={() => onDeleteMetric(metric.id)}
+                  onClick={() => onDeleteMetric(metric.id, () => router.refresh())}
                   disabled={metric.ownerId.toUpperCase() === "SYSTEM"}
                 >
                   <TrashIcon color="red" />

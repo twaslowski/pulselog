@@ -20,6 +20,7 @@ export default function EntriesList({ entries }: { entries: EntryType[] }) {
       toast("Entry deleted successfully", {
         icon: <CheckIcon />,
       });
+      router.refresh();
     } catch (error: unknown) {
       const message = extractErrorMessage(error);
       toast("Failed to delete entry: " + message, {
